@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{BA55456E-F1F1-44DF-9930-6D28785CDE76}"
 EndProject
@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClearDataBase", "ClearDataB
 		{BA55456E-F1F1-44DF-9930-6D28785CDE76} = {BA55456E-F1F1-44DF-9930-6D28785CDE76}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1C3A2800-CE63-4C2E-85D0-9564D239DFFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{1C3A2800-CE63-4C2E-85D0-9564D239DFFF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BA55456E-F1F1-44DF-9930-6D28785CDE76} = {BA55456E-F1F1-44DF-9930-6D28785CDE76}
 	EndProjectSection

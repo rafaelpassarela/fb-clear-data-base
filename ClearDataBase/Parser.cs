@@ -23,7 +23,7 @@ namespace ClearDataBase
 
         private bool ConnectDataBase()
         {
-            _log.MessageLn("Conectando Banco de Dados...");
+            _log.MessageLn(strings.connectingDataBase);
 
             try
             {

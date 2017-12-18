@@ -33,7 +33,7 @@ namespace Domain
 
         public virtual void RemoveAll()
         {
-            _log.MessageLn($"Removendo {GetName()}...");
+            _log.MessageLn($"{strings.removing} {GetName()}...");
 
             foreach (var item in Items)
             {
