@@ -1,5 +1,6 @@
 ﻿using Domain;
 using FirebirdSql.Data.FirebirdClient;
+using LocalizationHelper;
 using System;
 using System.Data;
 

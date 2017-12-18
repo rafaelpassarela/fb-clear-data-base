@@ -13,7 +13,7 @@ namespace Domain
 
         protected override string GetName()
         {
-            return "Uniques e Checks";
+            return "Uniques/Checks";
         }
 
         public override string GetDeleteSQL(DbObjects item)

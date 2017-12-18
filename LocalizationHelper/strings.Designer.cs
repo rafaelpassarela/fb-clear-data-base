@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClearDataBase {
+namespace LocalizationHelper {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ClearDataBase {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ClearDataBase.strings", typeof(strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LocalizationHelper.strings", typeof(strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,6 +61,15 @@ namespace ClearDataBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking dependencies of.
+        /// </summary>
+        public static string checkDependencies {
+            get {
+                return ResourceManager.GetString("checkDependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connecting Database ....
         /// </summary>
         public static string connectingDataBase {
@@ -70,11 +79,38 @@ namespace ClearDataBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .: Remember to make a copy of the DataBase before start! :..
+        /// </summary>
+        public static string copyDataBase {
+            get {
+                return ResourceManager.GetString("copyDataBase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR.
+        /// </summary>
+        public static string error {
+            get {
+                return ResourceManager.GetString("error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press any key to close..
         /// </summary>
         public static string hit_close {
             get {
                 return ResourceManager.GetString("hit_close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading List of.
+        /// </summary>
+        public static string loadingList {
+            get {
+                return ResourceManager.GetString("loadingList", resourceCulture);
             }
         }
         

@@ -117,22 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="checkDependencies" xml:space="preserve">
+    <value>Verificando dependencias de</value>
+  </data>
   <data name="connectingDataBase" xml:space="preserve">
-    <value>Connexion de base de données ...</value>
+    <value>Conectando Banco de Dados...</value>
+  </data>
+  <data name="copyDataBase" xml:space="preserve">
+    <value>.: Lembre-se de fazer uma cópia do Banco de Dados antes de começar! :.</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>ERRO</value>
   </data>
   <data name="hit_close" xml:space="preserve">
-    <value>Appuyez sur n'importe quelle touche pour fermer.</value>
+    <value>Aperte qualquer tecla para fechar.</value>
+  </data>
+  <data name="loadingList" xml:space="preserve">
+    <value>Carregando Lista de</value>
   </data>
   <data name="main_msg" xml:space="preserve">
-    <value>Ce processus supprimera tous les déclencheurs, procédures et clés de la base de données</value>
+    <value>Esse processo irá remover todas as Triggers, Procedures e Chaves do banco</value>
   </data>
   <data name="main_msg_continue" xml:space="preserve">
-    <value>Pour continuer, écrivez</value>
+    <value>Para continuar, escreva</value>
   </data>
   <data name="removing" xml:space="preserve">
-    <value>Enlever</value>
+    <value>Removendo</value>
   </data>
   <data name="yes" xml:space="preserve">
-    <value>OUI</value>
+    <value>SIM</value>
   </data>
 </root>

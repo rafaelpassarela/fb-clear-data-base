@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LocalizationHelper\LocalizationHelper.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 

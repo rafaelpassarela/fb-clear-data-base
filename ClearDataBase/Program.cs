@@ -1,6 +1,7 @@
 ﻿using ColoredConsole;
 using Domain;
 using System;
+using LocalizationHelper;
 
 namespace ClearDataBase
 {
@@ -17,7 +18,11 @@ namespace ClearDataBase
             }
             else
             {
+                var t = new LocaleHelper();
                 //Console.WriteLine(CultureInfo.CurrentUICulture.Name);
+
+                ColorConsole.WriteLine(strings.copyDataBase.Green());
+
                 ColorConsole.WriteLine(strings.main_msg.Red());
                 ColorConsole.Write(options.DataBase.Yellow(), $" {strings.main_msg_continue} {strings.yes}: ".Red());
                 var answer = Console.ReadLine();

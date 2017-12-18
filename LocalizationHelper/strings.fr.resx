@@ -117,22 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="checkDependencies" xml:space="preserve">
+    <value>Vérification des dépendances de</value>
+  </data>
   <data name="connectingDataBase" xml:space="preserve">
-    <value>Connecting Database ...</value>
+    <value>Connexion de base de données ...</value>
+  </data>
+  <data name="copyDataBase" xml:space="preserve">
+    <value>.: N'oubliez pas de faire une copie de la base de données avant de commencer! :.</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>ERREUR</value>
   </data>
   <data name="hit_close" xml:space="preserve">
-    <value>Press any key to close.</value>
+    <value>Appuyez sur n'importe quelle touche pour fermer.</value>
+  </data>
+  <data name="loadingList" xml:space="preserve">
+    <value>Chargement de la liste de</value>
   </data>
   <data name="main_msg" xml:space="preserve">
-    <value>This process will remove all Triggers, Procedures, and Keys form the database</value>
+    <value>Ce processus supprimera tous les déclencheurs, procédures et clés de la base de données</value>
   </data>
   <data name="main_msg_continue" xml:space="preserve">
-    <value>To continue, write </value>
+    <value>Pour continuer, écrivez</value>
   </data>
   <data name="removing" xml:space="preserve">
-    <value>Removing</value>
+    <value>Enlever</value>
   </data>
   <data name="yes" xml:space="preserve">
-    <value>YES</value>
+    <value>OUI</value>
   </data>
 </root>

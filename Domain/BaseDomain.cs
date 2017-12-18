@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using LocalizationHelper;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ namespace Domain
                 }
                 catch (Exception e)
                 {
-                    _log.ErrorLn($"ERRO> {item.Name.Trim()} : {e.Message}");
+                    _log.ErrorLn($"{strings.error}> {item.Name.Trim()} : {e.Message}");
                     x = Console.CursorLeft;
                     y = Console.CursorTop;
                 }
@@ -75,7 +76,7 @@ namespace Domain
 
         public void Load()
         {
-            _log.Message($"Carregando Lista de {GetName()}... ");
+            _log.Message($"{strings.loadingList} {GetName()}... ");
 
             Items = DoLoad();
             _log.MessageLn(Items.Count().ToString());

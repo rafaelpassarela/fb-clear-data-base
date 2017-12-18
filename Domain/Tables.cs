@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using LocalizationHelper;
 
 namespace Domain
 {
@@ -15,7 +16,7 @@ namespace Domain
 
         public override void CheckDependencies()
         {
-            Console.WriteLine($" - Verificando dependencias de {GetName()}");
+            Console.WriteLine($" - {strings.checkDependencies} {GetName()}");
 
             foreach (var item in Items)
             {
@@ -28,7 +29,6 @@ namespace Domain
 
         private IEnumerable<string> GetDependents(string masterName)
         {
-            /* passa a tabela e retorna quem utiliza ela */
             return _connection.Query<string>($@"select distinct trim(rc.rdb$relation_name) as reference_table
                                                 from rdb$relation_constraints rc
                                                 join rdb$index_segments dis on (rc.rdb$index_name = dis.rdb$index_name)
@@ -37,16 +37,6 @@ namespace Domain
                                                 join rdb$index_segments master_index_segments on (m.rdb$index_name = master_index_segments.rdb$index_name)
                                                 where m.rdb$relation_name = '{masterName}'");
             //and rc.rdb$relation_name <> '{masterName}'");
-
-            /* passa a tabela e retorna quem ela utiliza */
-            //return _connection.Query<string>($@"select distinct trim(m.rdb$relation_name) as reference_table
-            //                                    from rdb$relation_constraints rc
-            //                                    join rdb$index_segments dis on (rc.rdb$index_name = dis.rdb$index_name)
-            //                                    join rdb$ref_constraints ref on (rc.rdb$constraint_name = ref.rdb$constraint_name)
-            //                                    join rdb$relation_constraints m on (ref.rdb$const_name_uq = m.rdb$constraint_name)
-            //                                    join rdb$index_segments master_index_segments on (m.rdb$index_name = master_index_segments.rdb$index_name)
-            //                                    where rc.rdb$relation_name = '{masterName}'
-            //                                      and m.rdb$relation_name <> '{masterName}'");
         }
 
         public override string GetDeleteSQL(DbObjects item)
@@ -69,7 +59,7 @@ namespace Domain
 
         public override void RemoveAll()
         {
-            _log.MessageLn($"Removendo {GetName()}...");
+            _log.MessageLn($"{strings.removing} {GetName()}...");
 
             foreach (var item in Items)
             {
@@ -86,7 +76,7 @@ namespace Domain
                         }
                         catch (Exception e)
                         {
-                            _log.ErrorLn($"FK ERROR {e.Message}");
+                            _log.ErrorLn($"FK {strings.error} {e.Message}");
                         }
                     }
                 }
@@ -102,7 +92,7 @@ namespace Domain
                     }
                     catch (Exception e)
                     {
-                        _log.ErrorLn($"PK ERROR {e.Message}");
+                        _log.ErrorLn($"PK {strings.error} {e.Message}");
                     }
                 }
             }

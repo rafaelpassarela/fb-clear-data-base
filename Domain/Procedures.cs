@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
+using LocalizationHelper;
 
 namespace Domain
 {
@@ -15,7 +16,7 @@ namespace Domain
 
         public override void CheckDependencies()
         {
-            Console.WriteLine($" - Verificando dependencias de {GetName()}");
+            Console.WriteLine($" - {strings.checkDependencies} {GetName()}");
 
             foreach (var item in Items)
             {
