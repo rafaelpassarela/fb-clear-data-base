@@ -1,7 +1,6 @@
 ﻿using ColoredConsole;
 using System;
 using System.IO;
-using System.Text;
 
 namespace Domain
 {
@@ -13,11 +12,13 @@ namespace Domain
         void Error(string mens);
         void ErrorLn(string mens);
 
+        int GetExecOrder();
     }
 
     public class LogFileWriter : ILogWriter
     {
         private string fileName;
+        private int execOrder = 0;
 
         public LogFileWriter(bool clearFile = true)
         {
@@ -39,6 +40,11 @@ namespace Domain
             MessageLn(mens);
         }
 
+        public int GetExecOrder()
+        {
+            return execOrder++;
+        }
+
         public void Message(string mens)
         {
             using (StreamWriter sw = new StreamWriter(fileName, File.Exists(fileName)))
@@ -58,7 +64,6 @@ namespace Domain
         }
     }
 
-
     public class LogScreenWriter : ILogWriter
     {
         private readonly ILogWriter file = new LogFileWriter();
@@ -73,6 +78,11 @@ namespace Domain
         {
             ColorConsole.WriteLine(mens.Red());
             file.ErrorLn(mens);
+        }
+
+        public int GetExecOrder()
+        {
+            return file.GetExecOrder();
         }
 
         public void Message(string mens)

@@ -18,7 +18,7 @@ namespace Domain
 
         public override string GetDeleteSQL(DbObjects item)
         {
-            return $"DROP TRIGGER {item.Name};";
+            return $"drop trigger {item.Name.Trim()};";
         }
 
         protected override IEnumerable<DbObjects> DoLoad()

@@ -18,7 +18,7 @@ namespace Domain
 
         public override string GetDeleteSQL(DbObjects item)
         {
-            return $"ALTER TABLE {item.RelationName} DROP CONSTRAINT {item.Name};";
+            return $"alter table {item.RelationName.Trim()} drop constraint {item.Name.Trim()};";
         }
 
         protected override IEnumerable<DbObjects> DoLoad()

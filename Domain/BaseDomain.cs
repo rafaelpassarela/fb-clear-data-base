@@ -16,8 +16,6 @@ namespace Domain
         protected abstract string GetName();
         protected abstract IEnumerable<DbObjects> DoLoad();
 
-        public delegate void OnLog(string msg, bool isError);
-
         protected readonly IDbConnection _connection;
         protected readonly ILogWriter _log;
 
@@ -28,6 +26,11 @@ namespace Domain
             _connection = connection;
             _log = log;
             Load();
+        }
+
+        public virtual IEnumerable<DbObjects> GetProcessedItems()
+        {
+            return Items;
         }
 
         public virtual void CheckDependencies() { }
@@ -61,7 +64,11 @@ namespace Domain
 
                 try
                 {
-                    _connection.Execute(GetDeleteSQL(item));
+                    item.ExecOrder = _log.GetExecOrder();
+                    item.SQL = GetDeleteSQL(item);
+
+                    _connection.Execute( item.SQL );
+
                     item.Checked = true;
                     Console.SetCursorPosition(x, y);
                 }

@@ -10,6 +10,8 @@ namespace Domain
 {
     public class Tables : BaseDomain
     {
+        private readonly List<DbObjects> ProcItems = new List<DbObjects>();
+
         public Tables(IDbConnection connection, ILogWriter log) : base(connection, log)
         {
         }
@@ -61,6 +63,8 @@ namespace Domain
         {
             _log.MessageLn($"{strings.removing} {GetName()}...");
 
+            DbObjects proc;
+
             foreach (var item in Items)
             {
                 // antes de remover as chaves do item, vai nas dependencias e remove as FKs com o item
@@ -71,7 +75,16 @@ namespace Domain
                         _log.Message($"-{item.Name}->{dep.Name} = {fk}");
                         try
                         {
-                            _connection.Execute($"ALTER TABLE {dep.Name} DROP CONSTRAINT {fk};");
+                            proc = new DbObjects
+                            {
+                                Checked = false,
+                                ExecOrder = _log.GetExecOrder(),
+                                SQL = $"alter table {dep.Name.Trim()} drop constraint {fk.Trim()};",
+                                Name = $"{ item.Name }->{ dep.Name} = { fk}"
+                            };
+                            ProcItems.Add(proc);
+
+                            _connection.Execute(proc.SQL);
                             _log.MessageLn(" | OK");
                         }
                         catch (Exception e)
@@ -87,7 +100,16 @@ namespace Domain
                     _log.Message($"-{item.Name} = {pk}");
                     try
                     {
-                        _connection.Execute($"ALTER TABLE {item.Name} DROP CONSTRAINT {pk};");
+                        proc = new DbObjects
+                        {
+                            Checked = false,
+                            ExecOrder = _log.GetExecOrder(),
+                            SQL = $"alter table {item.Name} drop constraint {pk.Trim()};",
+                            Name = $"{item.Name} = {pk}"
+                        };
+                        ProcItems.Add(proc);
+
+                        _connection.Execute(proc.SQL);
                         _log.MessageLn(" | OK");
                     }
                     catch (Exception e)
@@ -121,6 +143,11 @@ namespace Domain
                       where rc.rdb$relation_name = '{table}'
                         and rc.rdb$constraint_type = 'PRIMARY KEY'
                       order by 1";
+        }
+
+        public override IEnumerable<DbObjects> GetProcessedItems()
+        {
+            return ProcItems;
         }
     }
 }

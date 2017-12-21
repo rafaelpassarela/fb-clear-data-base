@@ -1,12 +1,7 @@
-﻿using System;
-
-namespace LocalizationHelper
+﻿namespace LocalizationHelper
 {
     public class LocaleHelper
     {
-        public string GetTeste()
-        {
-            return "Teste";
-        }
+        
     }
 }
