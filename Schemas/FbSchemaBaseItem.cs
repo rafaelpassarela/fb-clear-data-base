@@ -1,8 +1,12 @@
-﻿namespace Schemas
+﻿using System.Data;
+
+namespace Schemas
 {
-    class FbSchemaBaseItem
+    public abstract class FbSchemaBaseItem
     {
         public string TableName { get; set; }
         public string Name { get; set; }
+
+        public abstract void ProcessDataRow(DataRow row);
     }
 }

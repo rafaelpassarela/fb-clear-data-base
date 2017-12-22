@@ -51,6 +51,8 @@ namespace ClearDataBase
             {
                 InitSchemas();
 
+                throw new Exception("Teste para nao remover do banco antes de extrair o meta");
+
                 tables = (Tables)GetObject<Tables>();
                 triggers = (Triggers)GetObject<Triggers>();
                 procedures = (Procedures)GetObject<Procedures>();

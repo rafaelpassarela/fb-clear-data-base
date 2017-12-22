@@ -27,10 +27,12 @@ namespace Schemas
          * PrimaryKeys - OK
          * Triggers - Ok
          */
-
+        
         private readonly FbConnection _con;
         private readonly ILogWriter _log;
         private string _workPath;
+
+        public FbSchemaTriggerCollection Triggers { get; set; } = new FbSchemaTriggerCollection();
 
         public FbSchema(FbConnection connection, ILogWriter log)
         {
@@ -48,17 +50,18 @@ namespace Schemas
                 File.Delete(file);
             }
 
-            SaveSchema("Tables");
-            SaveSchema("Columns");
-            SaveSchema("Views");
-            SaveSchema("ViewColumns");
-            SaveSchema("ProcedureParameters");
-            SaveSchema("Procedures");
-            SaveSchema("IndexColumns");
-            SaveSchema("Indexes");
-            SaveSchema("ForeignKeys");
-            SaveSchema("Triggers");
-            SaveSchema("PrimaryKeys");
+            SaveSchema("Triggers", Triggers);
+
+            //SaveSchema("Tables");
+            //SaveSchema("Columns");
+            //SaveSchema("Views");
+            //SaveSchema("ViewColumns");
+            //SaveSchema("ProcedureParameters");
+            //SaveSchema("Procedures");
+            //SaveSchema("IndexColumns");
+            //SaveSchema("Indexes");
+            //SaveSchema("ForeignKeys");
+            //SaveSchema("PrimaryKeys");
         }
 
         private DataTable GetShema(string name)
@@ -66,9 +69,10 @@ namespace Schemas
             return _con.GetSchema(name);
         }
 
-        private void SaveSchema(string schema)
+        private void SaveSchema(string schema, FbSchemaBaseCollection collection)
         {
-            string fileName = $"{_workPath}\\{schema}.sql"; 
+            FbSchemaBaseItem item;
+            string fileName = $"{_workPath}\\{schema}.sql";
 
             try
             {
@@ -79,6 +83,9 @@ namespace Schemas
                 {
                     foreach (DataRow row in table.Rows)
                     {
+                        item = collection.GetNewItem();
+                        item.ProcessDataRow(row);
+
                         foreach (DataColumn col in table.Columns)
                         {
                             sw.WriteLine("{0} = {1}", col.ColumnName, row[col]);
