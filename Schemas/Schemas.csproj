@@ -5,14 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.2" />
+    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="5.12.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LocalizationHelper\LocalizationHelper.csproj" />
     <ProjectReference Include="..\LogUtils\LogUtils.csproj" />
-    <ProjectReference Include="..\Models\Models.csproj" />
-    <ProjectReference Include="..\Schemas\Schemas.csproj" />
   </ItemGroup>
 
 </Project>

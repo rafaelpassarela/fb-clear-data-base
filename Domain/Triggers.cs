@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using LogUtils;
 using Models;
 using System.Collections.Generic;
 using System.Data;
@@ -28,6 +29,11 @@ namespace Domain
                                                  where t.rdb$trigger_name not like '%$%'
                                                    and t.rdb$trigger_name not like 'CHECK_%'
                                                  order by t.rdb$trigger_name");
+        }
+
+        public override string GetRollbackSQL(DbObjects item)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using LocalizationHelper;
+using LogUtils;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Domain
         private readonly string C_EMPTY_TABLE_NAME = "                               ";
 
         public abstract string GetDeleteSQL(DbObjects item);
+        public abstract string GetRollbackSQL(DbObjects item);
         protected abstract string GetName();
         protected abstract IEnumerable<DbObjects> DoLoad();
 

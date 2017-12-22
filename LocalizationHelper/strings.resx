@@ -129,6 +129,9 @@
   <data name="error" xml:space="preserve">
     <value>ERROR</value>
   </data>
+  <data name="extractingSchema" xml:space="preserve">
+    <value>Extracting Schema</value>
+  </data>
   <data name="hit_close" xml:space="preserve">
     <value>Press any key to close.</value>
   </data>

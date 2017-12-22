@@ -1,10 +1,11 @@
 ﻿using Dapper;
+using LocalizationHelper;
+using LogUtils;
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data;
-using LocalizationHelper;
+using System.Linq;
 
 namespace Domain
 {
@@ -52,6 +53,11 @@ namespace Domain
         protected override string GetName()
         {
             return "Procedures";
+        }
+
+        public override string GetRollbackSQL(DbObjects item)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

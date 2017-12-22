@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace Domain
+namespace LogUtils
 {
     public interface ILogWriter
     {

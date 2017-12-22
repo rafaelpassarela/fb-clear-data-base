@@ -97,6 +97,15 @@ namespace LocalizationHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extracting Schema.
+        /// </summary>
+        public static string extractingSchema {
+            get {
+                return ResourceManager.GetString("extractingSchema", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Press any key to close..
         /// </summary>
         public static string hit_close {

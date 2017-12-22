@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using LogUtils;
 using Models;
 using System.Collections.Generic;
 using System.Data;
@@ -29,6 +30,11 @@ namespace Domain
                                                  from rdb$relation_constraints rc
                                                  where rc.rdb$constraint_type in ('UNIQUE', 'CHECK')
                                                  order by rc.rdb$relation_name, rc.rdb$constraint_name");
+        }
+
+        public override string GetRollbackSQL(DbObjects item)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

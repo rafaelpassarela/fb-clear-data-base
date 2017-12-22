@@ -1,6 +1,8 @@
 ﻿using Domain;
 using FirebirdSql.Data.FirebirdClient;
 using LocalizationHelper;
+using LogUtils;
+using Schemas;
 using System;
 using System.Data;
 using System.IO;
@@ -47,6 +49,8 @@ namespace ClearDataBase
             _log.MessageLn("");
             if (ConnectDataBase())
             {
+                InitSchemas();
+
                 tables = (Tables)GetObject<Tables>();
                 triggers = (Triggers)GetObject<Triggers>();
                 procedures = (Procedures)GetObject<Procedures>();
@@ -68,19 +72,28 @@ namespace ClearDataBase
             }
         }
 
+        private void InitSchemas()
+        {
+            var fb = new FbSchema((FbConnection)dataBase, _log);
+            fb.Initialize();
+        }
+
         private void SaveSQLLog()
         {
             string fileName = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\SQLs";
             Directory.CreateDirectory(fileName);
-            
-            fileName = fileName + $"\\SQL_{DateTime.Now.ToString("yyyy_MM_dd-HHmmss")}.sql";
 
+            fileName = fileName + $"\\SQL_{DateTime.Now.ToString("yyyy_MM_dd-HHmmss")}.sql";
             DoSaveSQLLog(fileName, triggers);
             DoSaveSQLLog(fileName, procedures);
             DoSaveSQLLog(fileName, tables);
             DoSaveSQLLog(fileName, uniqCheks);
 
-            //fileName = fileName.Replace(".sql", "_Rollback.sql");
+            fileName = fileName.Replace(".sql", "_Rollback.sql");
+            DoSaveRollbackSQLLog(fileName, triggers);
+            DoSaveRollbackSQLLog(fileName, procedures);
+            DoSaveRollbackSQLLog(fileName, tables);
+            DoSaveRollbackSQLLog(fileName, uniqCheks);
         }
 
         private void DoSaveSQLLog(string fileName, BaseDomain obj)
@@ -90,6 +103,18 @@ namespace ClearDataBase
                 foreach (var item in obj.GetProcessedItems().OrderBy(x => x.ExecOrder))
                 {
                     sw.WriteLine(item.SQL);
+                }
+                sw.Close();
+            }
+        }
+
+        private void DoSaveRollbackSQLLog(string fileName, BaseDomain obj)
+        {
+            using (StreamWriter sw = new StreamWriter(fileName, File.Exists(fileName)))
+            {
+                foreach (var item in obj.GetProcessedItems().OrderByDescending(x => x.ExecOrder))
+                {
+                    sw.WriteLine(item.RevertSQL);
                 }
                 sw.Close();
             }
