@@ -71,5 +71,10 @@ SET TERM ; ^
                 Position = seq;
             }
         }
+
+        public string GetMasterName()
+        {
+            return TableName;
+        }
     }
 }

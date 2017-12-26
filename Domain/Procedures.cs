@@ -58,7 +58,7 @@ namespace Domain
 
         public override string GetRollbackSQL(DbObjects item)
         {
-            throw new System.NotImplementedException();
+            return _schema.Procedures.GetCreateSQLForItem(item.Name);
         }
     }
 }

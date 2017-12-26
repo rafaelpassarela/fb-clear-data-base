@@ -92,8 +92,8 @@ namespace ClearDataBase
             DoSaveSQLLog(fileName, uniqCheks);
 
             fileName = fileName.Replace(".sql", "_Rollback.sql");
-            DoSaveRollbackSQLLog(fileName, triggers);
             DoSaveRollbackSQLLog(fileName, procedures);
+            DoSaveRollbackSQLLog(fileName, triggers);           
             DoSaveRollbackSQLLog(fileName, tables);
             DoSaveRollbackSQLLog(fileName, uniqCheks);
         }

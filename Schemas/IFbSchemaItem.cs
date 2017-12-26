@@ -6,6 +6,7 @@ namespace Schemas
     {
         void ProcessDataRow(DataRow row);
         string GetName();
+        string GetMasterName();
         string GetCreateSQL();
     }
 }
