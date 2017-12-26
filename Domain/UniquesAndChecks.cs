@@ -3,12 +3,13 @@ using LogUtils;
 using Models;
 using System.Collections.Generic;
 using System.Data;
+using Schemas;
 
 namespace Domain
 {
     public class UniquesAndChecks : BaseDomain
     {
-        public UniquesAndChecks(IDbConnection connection, ILogWriter log) : base(connection, log)
+        public UniquesAndChecks(IDbConnection connection, ILogWriter log, FbSchema schema) : base(connection, log, schema)
         {
         }
 

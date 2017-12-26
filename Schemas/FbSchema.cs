@@ -33,6 +33,7 @@ namespace Schemas
         private string _workPath;
 
         public FbSchemaBaseCollection<FbSchemaTrigger> Triggers { get; set; } = new FbSchemaBaseCollection<FbSchemaTrigger>();
+        public FbSchemaBaseCollection<FbSchemaProcedure> Procedures { get; set } = new FbSchemaBaseCollection<FbSchemaProcedure>();
 
         public FbSchema(FbConnection connection, ILogWriter log)
         {
@@ -51,13 +52,14 @@ namespace Schemas
             }
 
             SaveSchema("Triggers", Triggers );
+            SaveSchema("Procedures");
+            SaveSchema("ProcedureParameters");
 
             //SaveSchema("Tables");
             //SaveSchema("Columns");
             //SaveSchema("Views");
             //SaveSchema("ViewColumns");
-            //SaveSchema("ProcedureParameters");
-            //SaveSchema("Procedures");
+
             //SaveSchema("IndexColumns");
             //SaveSchema("Indexes");
             //SaveSchema("ForeignKeys");

@@ -144,6 +144,9 @@
   <data name="main_msg_continue" xml:space="preserve">
     <value>Para continuar, escreva</value>
   </data>
+  <data name="notFound" xml:space="preserve">
+    <value>Nao Localizado </value>
+  </data>
   <data name="removing" xml:space="preserve">
     <value>Removendo</value>
   </data>

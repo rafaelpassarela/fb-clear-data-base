@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Schemas;
 
 namespace Domain
 {
@@ -13,7 +14,7 @@ namespace Domain
     {
         private readonly List<DbObjects> ProcItems = new List<DbObjects>();
 
-        public Tables(IDbConnection connection, ILogWriter log) : base(connection, log)
+        public Tables(IDbConnection connection, ILogWriter log, FbSchema schema) : base(connection, log, schema)
         {
         }
 

@@ -7,6 +7,7 @@ using System;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace ClearDataBase
 {
@@ -62,10 +63,9 @@ namespace ClearDataBase
                 try
                 {
                     triggers.RemoveAll();
-                    throw new Exception("Teste para nao remover do banco antes de extrair o meta");
                     procedures.RemoveAll();
-                    tables.RemoveAll();
-                    uniqCheks.RemoveAll();
+                    //tables.RemoveAll();
+                    //uniqCheks.RemoveAll();
                 }
                 finally
                 {
@@ -100,7 +100,7 @@ namespace ClearDataBase
 
         private void DoSaveSQLLog(string fileName, BaseDomain obj)
         {
-            using (StreamWriter sw = new StreamWriter(fileName, File.Exists(fileName)))
+            using (StreamWriter sw = new StreamWriter(fileName, File.Exists(fileName), _options.GetEncoding()))
             {
                 foreach (var item in obj.GetProcessedItems().OrderBy(x => x.ExecOrder))
                 {
@@ -112,7 +112,7 @@ namespace ClearDataBase
 
         private void DoSaveRollbackSQLLog(string fileName, BaseDomain obj)
         {
-            using (StreamWriter sw = new StreamWriter(fileName, File.Exists(fileName)))
+            using (StreamWriter sw = new StreamWriter(fileName, File.Exists(fileName), _options.GetEncoding()))
             {
                 foreach (var item in obj.GetProcessedItems().OrderByDescending(x => x.ExecOrder))
                 {
@@ -124,7 +124,7 @@ namespace ClearDataBase
 
         private BaseDomain GetObject<T>() where T : BaseDomain
         {
-            var obj = (T)Activator.CreateInstance(typeof(T), dataBase, _log);
+            var obj = (T)Activator.CreateInstance(typeof(T), dataBase, _log, fbSchema);
             return obj;
         }
     }

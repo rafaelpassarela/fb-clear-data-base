@@ -6,12 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Schemas;
 
 namespace Domain
 {
     public class Procedures : BaseDomain
     {
-        public Procedures(IDbConnection connection, ILogWriter log) : base(connection, log)
+        public Procedures(IDbConnection connection, ILogWriter log, FbSchema schema) : base(connection, log, schema)
         {
         }
 

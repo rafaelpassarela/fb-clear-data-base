@@ -2,6 +2,7 @@
 using LocalizationHelper;
 using LogUtils;
 using Models;
+using Schemas;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,20 +14,22 @@ namespace Domain
     {
         private readonly string C_EMPTY_TABLE_NAME = "                               ";
 
-        public abstract string GetDeleteSQL(DbObjects item);
+        public abstract string GetDeleteSQL(DbObjects item);        
         public abstract string GetRollbackSQL(DbObjects item);
         protected abstract string GetName();
         protected abstract IEnumerable<DbObjects> DoLoad();
 
         protected readonly IDbConnection _connection;
         protected readonly ILogWriter _log;
+        protected readonly FbSchema _schema;
 
         public IEnumerable<DbObjects> Items { get; set; }
 
-        public BaseDomain(IDbConnection connection, ILogWriter log)
+        public BaseDomain(IDbConnection connection, ILogWriter log, FbSchema schema)
         {
             _connection = connection;
             _log = log;
+            _schema = schema;
             Load();
         }
 
@@ -68,6 +71,7 @@ namespace Domain
                 {
                     item.ExecOrder = _log.GetExecOrder();
                     item.SQL = GetDeleteSQL(item);
+                    item.RevertSQL = GetRollbackSQL(item);
 
                     _connection.Execute( item.SQL );
 

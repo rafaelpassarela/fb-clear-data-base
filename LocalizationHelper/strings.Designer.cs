@@ -142,6 +142,15 @@ namespace LocalizationHelper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Found.
+        /// </summary>
+        public static string notFound {
+            get {
+                return ResourceManager.GetString("notFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Removing.
         /// </summary>
         public static string removing {

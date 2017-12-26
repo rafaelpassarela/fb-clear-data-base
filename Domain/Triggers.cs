@@ -3,12 +3,13 @@ using LogUtils;
 using Models;
 using System.Collections.Generic;
 using System.Data;
+using Schemas;
 
 namespace Domain
 {
     public class Triggers : BaseDomain
     {
-        public Triggers(IDbConnection connection, ILogWriter log) : base(connection, log)
+        public Triggers(IDbConnection connection, ILogWriter log, FbSchema schema) : base(connection, log, schema)
         {
         }
 
@@ -33,7 +34,7 @@ namespace Domain
 
         public override string GetRollbackSQL(DbObjects item)
         {
-            throw new System.NotImplementedException();
+            return _schema.Triggers.GetCreateSQLForItem(item.Name);
         }
     }
 }

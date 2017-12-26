@@ -12,7 +12,7 @@ namespace ClearDataBase
             Options options = new Options();
             CommandLine.Parser.Default.ParseArguments(args, options);
 
-            if (options.DataBase == null)
+            if (options.DataBase == null || (options.GetEncoding() == null))
             {
                 Console.Write(options.GetUsage());
             }

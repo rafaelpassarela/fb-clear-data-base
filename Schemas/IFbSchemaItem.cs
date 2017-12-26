@@ -5,6 +5,7 @@ namespace Schemas
     public interface IFbSchemaItem
     {
         void ProcessDataRow(DataRow row);
-        //string GetCreateSQL();
+        string GetName();
+        string GetCreateSQL();
     }
 }

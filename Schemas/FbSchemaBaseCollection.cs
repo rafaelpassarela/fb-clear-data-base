@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LocalizationHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,17 @@ namespace Schemas
             Items.Add(item);
 
             return item;
+        }
+
+        public IFbSchemaItem GetItemByName(string name)
+        {
+            return Items.FirstOrDefault(x => x.GetName().ToUpper() == name.ToUpper());
+        }
+
+        public string GetCreateSQLForItem(string itemName)
+        {
+            var item = GetItemByName(itemName.Trim());
+            return (item != null) ? item.GetCreateSQL() : $"{strings.error}> {strings.notFound} [{itemName}]";
         }
     }
 }
