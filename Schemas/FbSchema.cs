@@ -32,7 +32,7 @@ namespace Schemas
         private readonly ILogWriter _log;
         private string _workPath;
 
-        public FbSchemaTriggerCollection Triggers { get; set; } = new FbSchemaTriggerCollection();
+        public FbSchemaBaseCollection<FbSchemaTrigger> Triggers { get; set; } = new FbSchemaBaseCollection<FbSchemaTrigger>();
 
         public FbSchema(FbConnection connection, ILogWriter log)
         {
@@ -50,7 +50,7 @@ namespace Schemas
                 File.Delete(file);
             }
 
-            SaveSchema("Triggers", Triggers);
+            SaveSchema("Triggers", Triggers );
 
             //SaveSchema("Tables");
             //SaveSchema("Columns");
@@ -69,10 +69,10 @@ namespace Schemas
             return _con.GetSchema(name);
         }
 
-        private void SaveSchema(string schema, FbSchemaBaseCollection collection)
+        private void SaveSchema<T>(string schema, FbSchemaBaseCollection<T> collection) where T : IFbSchemaItem
         {
-            FbSchemaBaseItem item;
-            string fileName = $"{_workPath}\\{schema}.sql";
+            IFbSchemaItem item;
+            string fileName = $"{_workPath}\\{schema}.log";
 
             try
             {

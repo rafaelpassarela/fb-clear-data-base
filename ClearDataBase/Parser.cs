@@ -19,6 +19,7 @@ namespace ClearDataBase
         private Procedures procedures;
         private Triggers triggers;
         private UniquesAndChecks uniqCheks;
+        private FbSchema fbSchema;
 
         public Parser(Options options, ILogWriter log)
         {
@@ -51,8 +52,6 @@ namespace ClearDataBase
             {
                 InitSchemas();
 
-                throw new Exception("Teste para nao remover do banco antes de extrair o meta");
-
                 tables = (Tables)GetObject<Tables>();
                 triggers = (Triggers)GetObject<Triggers>();
                 procedures = (Procedures)GetObject<Procedures>();
@@ -63,6 +62,7 @@ namespace ClearDataBase
                 try
                 {
                     triggers.RemoveAll();
+                    throw new Exception("Teste para nao remover do banco antes de extrair o meta");
                     procedures.RemoveAll();
                     tables.RemoveAll();
                     uniqCheks.RemoveAll();
@@ -76,8 +76,8 @@ namespace ClearDataBase
 
         private void InitSchemas()
         {
-            var fb = new FbSchema((FbConnection)dataBase, _log);
-            fb.Initialize();
+            fbSchema = new FbSchema((FbConnection)dataBase, _log);
+            fbSchema.Initialize();
         }
 
         private void SaveSQLLog()
@@ -124,10 +124,7 @@ namespace ClearDataBase
 
         private BaseDomain GetObject<T>() where T : BaseDomain
         {
-            //var obj = Activator.CreateInstance<T>();
             var obj = (T)Activator.CreateInstance(typeof(T), dataBase, _log);
-            //obj.SetConnection(dataBase);
-            //obj.Load();
             return obj;
         }
     }

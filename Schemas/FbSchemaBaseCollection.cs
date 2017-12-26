@@ -6,19 +6,16 @@ using System.Threading.Tasks;
 
 namespace Schemas
 {
-    public abstract class FbSchemaBaseCollection
+    public class FbSchemaBaseCollection<T> where T : IFbSchemaItem
     {
-        public List<FbSchemaBaseItem> Items { get; set; } = new List<FbSchemaBaseItem>();
+        public List<IFbSchemaItem> Items { get; set; } = new List<IFbSchemaItem>();
 
-        public FbSchemaBaseItem GetNewItem()
+        public IFbSchemaItem GetNewItem()
         {
-            var item = DoGetNewItem();
+            var item = (T)Activator.CreateInstance(typeof(T));
             Items.Add(item);
 
             return item;
         }
-
-        protected abstract FbSchemaBaseItem DoGetNewItem();
-
     }
 }

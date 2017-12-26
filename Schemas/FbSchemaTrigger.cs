@@ -2,15 +2,17 @@
 
 namespace Schemas
 {
-    class FbSchemaTrigger : FbSchemaBaseItem
+    public class FbSchemaTrigger : IFbSchemaItem
     {
+        public string TableName { get; set; }
+        public string Name { get; set; }
         public bool Inactive { get; set; }
         public bool System { get; set; }
         public int TriggerType { get; set; } = -1;
         public int Sequence { get; set; } = -1;
         public string Source { get; set; }
 
-        public override void ProcessDataRow(DataRow row)
+        public void ProcessDataRow(DataRow row)
         {
             Name = row["TRIGGER_NAME"].ToString();
             TableName = row["TABLE_NAME"].ToString();
