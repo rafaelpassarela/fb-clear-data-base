@@ -81,6 +81,7 @@ namespace Domain
                             {
                                 Checked = false,
                                 ExecOrder = _log.GetExecOrder(),
+                                RevertSQL = _schema.Keys.GetCreateSQLForItem(fk.Trim()),
                                 SQL = $"alter table {dep.Name.Trim()} drop constraint {fk.Trim()};",
                                 Name = $"{ item.Name }->{ dep.Name} = { fk}"
                             };
@@ -106,6 +107,7 @@ namespace Domain
                         {
                             Checked = false,
                             ExecOrder = _log.GetExecOrder(),
+                            RevertSQL = _schema.Keys.GetCreateSQLForItem(pk.Trim()),
                             SQL = $"alter table {item.Name} drop constraint {pk.Trim()};",
                             Name = $"{item.Name} = {pk}"
                         };

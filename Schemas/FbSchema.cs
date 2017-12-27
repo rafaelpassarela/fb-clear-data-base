@@ -27,13 +27,15 @@ namespace Schemas
          * PrimaryKeys - OK
          * Triggers - Ok
          */
-        
+
         private readonly FbConnection _con;
         private readonly ILogWriter _log;
         private string _workPath;
 
-        public FbSchemaBaseCollection<FbSchemaTrigger> Triggers { get; set; } = new FbSchemaBaseCollection<FbSchemaTrigger>();
-        public FbSchemaProcedureCollection<FbSchemaProcedure> Procedures { get; set; } = new FbSchemaProcedureCollection<FbSchemaProcedure>();
+        public FbSchemaBaseCollection<FbSchemaTrigger> Triggers { get; private set; } = new FbSchemaBaseCollection<FbSchemaTrigger>();
+        public FbSchemaProcedureCollection<FbSchemaProcedure> Procedures { get; private set; } = new FbSchemaProcedureCollection<FbSchemaProcedure>();
+        public FbSchemaKeysCollection Keys { get; private set; } = new FbSchemaKeysCollection();
+
         private FbSchemaBaseCollection<FbSchemaProcedureParam> ProcParams { get; set; } = new FbSchemaBaseCollection<FbSchemaProcedureParam>();
 
         public FbSchema(FbConnection connection, ILogWriter log)
@@ -47,24 +49,24 @@ namespace Schemas
             _workPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\Schema";
             Directory.CreateDirectory(_workPath);
 
-            foreach (var file in Directory.EnumerateFiles(_workPath, "*.sql"))
+            foreach (var file in Directory.EnumerateFiles(_workPath, "*.log"))
             {
                 File.Delete(file);
             }
 
-            SaveSchema("Triggers", Triggers );
+            SaveSchema("Triggers", Triggers);
             SaveSchema("Procedures", Procedures);
             SaveSchema("ProcedureParameters", ProcParams);
+            SaveSchema("PrimaryKeys", Keys.PrimaryKeys);
+            SaveSchema("ForeignKeys", Keys.ForeignKeys);
+            SaveSchema("ForeignKeyColumns", Keys.ForeignKeyColumns);
+            SaveSchema("Indexes", Keys.Indexes);
+            SaveSchema("IndexColumns", Keys.IndexesColumns);
 
             //SaveSchema("Tables");
             //SaveSchema("Columns");
             //SaveSchema("Views");
             //SaveSchema("ViewColumns");
-
-            //SaveSchema("IndexColumns");
-            //SaveSchema("Indexes");
-            //SaveSchema("ForeignKeys");
-            //SaveSchema("PrimaryKeys");
 
             Procedures.ProcessParameters(ProcParams);
         }

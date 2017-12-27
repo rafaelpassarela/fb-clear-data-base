@@ -64,8 +64,8 @@ namespace ClearDataBase
                 {
                     triggers.RemoveAll();
                     procedures.RemoveAll();
-                    //tables.RemoveAll();
-                    //uniqCheks.RemoveAll();
+                    tables.RemoveAll();
+                    uniqCheks.RemoveAll();
                 }
                 finally
                 {
@@ -76,6 +76,24 @@ namespace ClearDataBase
 
         private void InitSchemas()
         {
+            //var table = (dataBase as FbConnection).GetSchema();
+            //var fileName = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\Schema\\AllSchema.log";
+
+            //using (StreamWriter sw = new StreamWriter(fileName, File.Exists(fileName)))
+            //{
+            //    foreach (DataRow row in table.Rows)
+            //    {
+            //        foreach (DataColumn col in table.Columns)
+            //        {
+            //            Console.WriteLine("{0} = {1}", col.ColumnName, row[col]);
+            //            sw.WriteLine("{0} = {1}", col.ColumnName, row[col]);
+            //        }
+            //        Console.WriteLine("============================");
+            //        sw.WriteLine("============================");
+            //    }
+            //    sw.Close();
+            //}
+            
             fbSchema = new FbSchema((FbConnection)dataBase, _log);
             fbSchema.Initialize();
         }
