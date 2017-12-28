@@ -46,12 +46,12 @@ namespace Schemas
                 return GetForeignKeySQL((fkIdx as FbSchemaForeignKey));
             }
 
-            if ((idx as FbSchemaIndexes).IndexType == "0" || (idx as FbSchemaIndexes).IndexType == "1")
-            {
-                return GetIndexConstraint((idx as FbSchemaIndexes));
-            }
+            //if ((idx as FbSchemaIndexes).IndexType == "0" || (idx as FbSchemaIndexes).IndexType == "1")
+            //{
+            return GetIndexConstraint((idx as FbSchemaIndexes));
+            //}
 
-            throw new Exception($"{strings.error} 02> - [{itemName}] {strings.notFound}");
+            //throw new Exception($"{strings.error} 02> - [{itemName}] {strings.notFound}");
         }
 
         private string GetIndexConstraint(FbSchemaIndexes idx)
