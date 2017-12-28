@@ -42,7 +42,7 @@ namespace Schemas
                 return "";
             }
 
-            return $"ON DELETE {DeleteRule}";
+            return $"on delete {DeleteRule}";
         }
 
         public string GetUpdateRule()
@@ -52,7 +52,7 @@ namespace Schemas
                 return "";
             }
 
-            return $"ON UPDATE {UpdateRule}";
+            return $"on update {UpdateRule}";
         }
     }
 }

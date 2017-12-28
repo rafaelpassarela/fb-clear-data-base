@@ -26,11 +26,11 @@ namespace Domain
         protected override IEnumerable<DbObjects> DoLoad()
         {
             return _connection.Query<DbObjects>(@"select rc.rdb$constraint_name as name,
-                                                        rc.rdb$relation_name as relationName,
-                                                        0 as checked
-                                                 from rdb$relation_constraints rc
-                                                 where rc.rdb$constraint_type in ('UNIQUE', 'CHECK')
-                                                 order by rc.rdb$relation_name, rc.rdb$constraint_name");
+                                                         rc.rdb$relation_name as relationName,
+                                                         0 as checked
+                                                  from rdb$relation_constraints rc
+                                                  where rc.rdb$constraint_type in ('UNIQUE', 'CHECK')
+                                                  order by rc.rdb$relation_name, rc.rdb$constraint_name");
         }
 
         public override string GetRollbackSQL(DbObjects item)

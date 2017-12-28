@@ -20,6 +20,7 @@ namespace ClearDataBase
         private Procedures procedures;
         private Triggers triggers;
         private UniquesAndChecks uniqCheks;
+        private Indexes indexes;
         private FbSchema fbSchema;
 
         public Parser(Options options, ILogWriter log)
@@ -53,7 +54,10 @@ namespace ClearDataBase
             {
                 InitSchemas();
 
+                _log.MessageLn("");
+
                 tables = (Tables)GetObject<Tables>();
+                indexes = (Indexes)GetObject<Indexes>();
                 triggers = (Triggers)GetObject<Triggers>();
                 procedures = (Procedures)GetObject<Procedures>();
                 uniqCheks = (UniquesAndChecks)GetObject<UniquesAndChecks>();
@@ -66,6 +70,7 @@ namespace ClearDataBase
                     procedures.RemoveAll();
                     tables.RemoveAll();
                     uniqCheks.RemoveAll();
+                    indexes.RemoveAll();
                 }
                 finally
                 {
@@ -76,24 +81,6 @@ namespace ClearDataBase
 
         private void InitSchemas()
         {
-            //var table = (dataBase as FbConnection).GetSchema();
-            //var fileName = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\Schema\\AllSchema.log";
-
-            //using (StreamWriter sw = new StreamWriter(fileName, File.Exists(fileName)))
-            //{
-            //    foreach (DataRow row in table.Rows)
-            //    {
-            //        foreach (DataColumn col in table.Columns)
-            //        {
-            //            Console.WriteLine("{0} = {1}", col.ColumnName, row[col]);
-            //            sw.WriteLine("{0} = {1}", col.ColumnName, row[col]);
-            //        }
-            //        Console.WriteLine("============================");
-            //        sw.WriteLine("============================");
-            //    }
-            //    sw.Close();
-            //}
-            
             fbSchema = new FbSchema((FbConnection)dataBase, _log);
             fbSchema.Initialize();
         }
@@ -108,12 +95,14 @@ namespace ClearDataBase
             DoSaveSQLLog(fileName, procedures);
             DoSaveSQLLog(fileName, tables);
             DoSaveSQLLog(fileName, uniqCheks);
+            DoSaveSQLLog(fileName, indexes);
 
             fileName = fileName.Replace(".sql", "_Rollback.sql");
             DoSaveRollbackSQLLog(fileName, procedures);
             DoSaveRollbackSQLLog(fileName, triggers);           
             DoSaveRollbackSQLLog(fileName, tables);
             DoSaveRollbackSQLLog(fileName, uniqCheks);
+            DoSaveRollbackSQLLog(fileName, indexes);
         }
 
         private void DoSaveSQLLog(string fileName, BaseDomain obj)

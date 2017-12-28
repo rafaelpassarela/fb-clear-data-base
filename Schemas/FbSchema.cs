@@ -62,6 +62,8 @@ namespace Schemas
             SaveSchema("ForeignKeyColumns", Keys.ForeignKeyColumns);
             SaveSchema("Indexes", Keys.Indexes);
             SaveSchema("IndexColumns", Keys.IndexesColumns);
+            SaveSchema("CheckConstraintsByTable", Keys.CheckConstraints);
+            //SaveSchema("CheckConstraints", Keys.CheckConstraints);
 
             //SaveSchema("Tables");
             //SaveSchema("Columns");
